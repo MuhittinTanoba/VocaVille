@@ -41,7 +41,6 @@ class MainActivity : ComponentActivity() {
                             SettingsScreen(modifier = Modifier.padding(innerPadding))
                         }
                     }
-
                 }
             }
         }
