@@ -1,6 +1,5 @@
 package com.example.vocaville
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
@@ -8,10 +7,8 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -20,10 +17,8 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
-import androidx.compose.material3.AlertDialogDefaults.shape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.MaterialTheme.shapes
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -43,15 +38,28 @@ fun CategoryScreen(modifier: Modifier) {
     Scaffold(
         bottomBar = { BottomNavigation() }
     ) { padding ->
-        Column {
-            AnnouncementCardList(paddingValues = padding)
-            Spacer(modifier = Modifier.weight(1f))
-            CategoryList(paddingValues = padding)
-            Spacer(modifier = Modifier.size(20.dp))
+        Column (
+            modifier = Modifier
+                .padding(padding),
+            verticalArrangement = Arrangement.spacedBy(16.dp),
+        ){
+            StoryHeader()
+            AnnouncementCardList()
+            CategoryHeader()
+            CategoryList()
         }
     }
 }
 
+@Composable
+fun StoryHeader() {
+    Text(text = "Stories")
+}
+
+@Composable
+fun CategoryHeader(){
+    Text(text = "Category")
+}
 @Composable
 @Preview
 fun CategoryCardsCollection() {
@@ -84,7 +92,7 @@ fun CategoryCardsCollection() {
 
 
 @Composable
-fun CategoryList(paddingValues: PaddingValues) {
+fun CategoryList() {
     var deneme = listOf(
         "1",
         "2",
@@ -95,20 +103,8 @@ fun CategoryList(paddingValues: PaddingValues) {
     LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(paddingValues)
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.error
-            )
     ) {
-        items(deneme){item ->
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                CategoryCardsCollection()
-                CategoryCardsCollection()
-            }
+        items(deneme) { item ->
             Row(
                 horizontalArrangement = Arrangement.Center,
                 modifier = Modifier.fillMaxWidth()
@@ -117,14 +113,13 @@ fun CategoryList(paddingValues: PaddingValues) {
                 CategoryCardsCollection()
             }
         }
-
-        }
+    }
 }
 
 @Preview
 @Composable
 fun CategoryListPreview() {
-    CategoryList(PaddingValues(0.dp))
+    CategoryList()
 }
 
 @Composable
@@ -169,11 +164,10 @@ fun BottomNavigationPreview() {
 }
 
 @Composable
-fun AnnouncementCard(paddingValues: PaddingValues) {
+fun AnnouncementCard() {
     Surface(
         color = MaterialTheme.colorScheme.primary,
-        modifier = Modifier
-            .padding(paddingValues)
+
     ) {
         Box(
             modifier = Modifier
@@ -213,7 +207,6 @@ fun AnnouncementCard(paddingValues: PaddingValues) {
 @Composable
 fun AnnouncementCardList(
     modifier: Modifier = Modifier,
-    paddingValues: PaddingValues
 ){
     var announcementList = listOf(
         "1",
@@ -229,7 +222,7 @@ fun AnnouncementCardList(
         contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
         items(announcementList) {item ->
-            AnnouncementCard(paddingValues = paddingValues)
+            AnnouncementCard()
         }
     }
 }
@@ -237,5 +230,5 @@ fun AnnouncementCardList(
 @Preview
 @Composable
 fun AnnouncementCardListPreview() {
-    AnnouncementCardList(paddingValues = PaddingValues(0.dp))
+    AnnouncementCardList()
 }
