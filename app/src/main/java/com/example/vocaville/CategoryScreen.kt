@@ -40,7 +40,11 @@ fun CategoryScreen(modifier: Modifier) {
     Scaffold(
         bottomBar = { BottomNavigation() }
     ) { padding ->
-        CategoryList(padding)
+        Column {
+            Spacer(modifier = Modifier.weight(1f))
+            CategoryList(paddingValues = padding)
+            Spacer(modifier = Modifier.size(20.dp))
+        }
     }
 }
 
@@ -50,11 +54,7 @@ fun CategoryCardsCollection() {
     Surface(
         color = MaterialTheme.colorScheme.primary,
         modifier = Modifier
-            .padding(horizontal = 10.dp, vertical = 10.dp)
-            .border(
-                width = 1.dp,
-                color = MaterialTheme.colorScheme.error
-            )
+            .padding(horizontal = 5.dp, vertical = 5.dp)
     ) {
         Box {
             Column(
@@ -75,40 +75,46 @@ fun CategoryCardsCollection() {
                 )
             }
         }
-
     }
 }
 
 
 @Composable
 fun CategoryList(paddingValues: PaddingValues) {
-    Box(
-        modifier = Modifier.fillMaxWidth()
-            .padding(paddingValues)
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(paddingValues),
     ) {
-        Column(
-            modifier = Modifier
-                .align(Alignment.Center)
-                .fillMaxWidth()
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                CategoryCardsCollection()
-                CategoryCardsCollection()
-            }
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                CategoryCardsCollection()
-                CategoryCardsCollection()
-            }
+            CategoryCardsCollection()
+            CategoryCardsCollection()
         }
-    }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            CategoryCardsCollection()
+            CategoryCardsCollection()
+        }
+        Row(
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            CategoryCardsCollection()
+            CategoryCardsCollection()
+        }
+        }
 }
 
+@Preview
+@Composable
+fun CategoryListPreview() {
+    CategoryList(PaddingValues(0.dp))
+}
 
 @Composable
 private fun BottomNavigation(modifier: Modifier = Modifier) {
