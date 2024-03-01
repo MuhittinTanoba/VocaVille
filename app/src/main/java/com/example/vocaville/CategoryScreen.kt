@@ -14,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -41,6 +42,7 @@ fun CategoryScreen(modifier: Modifier) {
         bottomBar = { BottomNavigation() }
     ) { padding ->
         Column {
+            AnnouncementCard(paddingValues = padding)
             Spacer(modifier = Modifier.weight(1f))
             CategoryList(paddingValues = padding)
             Spacer(modifier = Modifier.size(20.dp))
@@ -60,7 +62,7 @@ fun CategoryCardsCollection() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
-                modifier = Modifier.size(140.dp)
+                modifier = Modifier.size(155.dp)
             ) {
                 Image(
                     painter = painterResource(id = R.drawable.category),
@@ -155,4 +157,45 @@ private fun BottomNavigation(modifier: Modifier = Modifier) {
 @Composable
 fun BottomNavigationPreview() {
     BottomNavigation()
+}
+
+@Composable
+fun AnnouncementCard(paddingValues: PaddingValues) {
+    Surface(
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier
+            .padding(paddingValues)
+    ) {
+        Box(
+            modifier = Modifier
+                .size(width = 285.dp, height = 140.dp)
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp,
+                    color = MaterialTheme.colorScheme.error
+                ),
+        ) {
+            Image(
+                painter = painterResource(id = R.drawable.category),
+                contentDescription = null,
+                contentScale = ContentScale.Crop,
+                modifier = Modifier
+                    .size(width = 285.dp, height = 140.dp)
+                    .fillMaxSize()
+            )
+            Column(
+                modifier = Modifier
+                    .align(Alignment.BottomStart),
+                ) {
+                Text(
+                    text = "Date",
+                    fontSize = 10.sp
+                )
+                Text(
+                    text = "Category Name",
+                    fontSize = 12.sp
+                )
+            }
+        }
+    }
 }
