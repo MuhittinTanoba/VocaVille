@@ -14,7 +14,9 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Home
@@ -42,7 +44,7 @@ fun CategoryScreen(modifier: Modifier) {
         bottomBar = { BottomNavigation() }
     ) { padding ->
         Column {
-            AnnouncementCard(paddingValues = padding)
+            AnnouncementCardList(paddingValues = padding)
             Spacer(modifier = Modifier.weight(1f))
             CategoryList(paddingValues = padding)
             Spacer(modifier = Modifier.size(20.dp))
@@ -83,32 +85,39 @@ fun CategoryCardsCollection() {
 
 @Composable
 fun CategoryList(paddingValues: PaddingValues) {
-    Column(
+    var deneme = listOf(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+    )
+    LazyColumn(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(paddingValues),
+            .padding(paddingValues)
+            .border(
+                width = 1.dp,
+                color = MaterialTheme.colorScheme.error
+            )
     ) {
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CategoryCardsCollection()
-            CategoryCardsCollection()
+        items(deneme){item ->
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                CategoryCardsCollection()
+                CategoryCardsCollection()
+            }
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                modifier = Modifier.fillMaxWidth()
+            ) {
+                CategoryCardsCollection()
+                CategoryCardsCollection()
+            }
         }
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CategoryCardsCollection()
-            CategoryCardsCollection()
-        }
-        Row(
-            horizontalArrangement = Arrangement.Center,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            CategoryCardsCollection()
-            CategoryCardsCollection()
-        }
+
         }
 }
 
@@ -198,4 +207,35 @@ fun AnnouncementCard(paddingValues: PaddingValues) {
             }
         }
     }
+}
+
+
+@Composable
+fun AnnouncementCardList(
+    modifier: Modifier = Modifier,
+    paddingValues: PaddingValues
+){
+    var announcementList = listOf(
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+    )
+
+    LazyRow (
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(15.dp),
+        contentPadding = PaddingValues(horizontal = 16.dp),
+        ) {
+        items(announcementList) {item ->
+            AnnouncementCard(paddingValues = paddingValues)
+        }
+    }
+}
+
+@Preview
+@Composable
+fun AnnouncementCardListPreview() {
+    AnnouncementCardList(paddingValues = PaddingValues(0.dp))
 }
