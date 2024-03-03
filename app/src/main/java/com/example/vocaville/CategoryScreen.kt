@@ -38,13 +38,13 @@ fun CategoryScreen(modifier: Modifier) {
     Scaffold(
         bottomBar = { BottomNavigation() }
     ) { padding ->
-        Column (
+        Column(
             modifier = Modifier
                 .padding(padding),
             verticalArrangement = Arrangement.spacedBy(16.dp),
-        ){
+        ) {
             StoryHeader()
-            AnnouncementCardList()
+            StoryCardList()
             CategoryHeader()
             CategoryList()
         }
@@ -131,12 +131,12 @@ private fun BottomNavigation(modifier: Modifier = Modifier) {
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Home,
+                    imageVector = Icons.Default.List,
                     contentDescription = null
                 )
             },
             label = {
-                Text(text = "Home")
+                Text(text = "Categories")
             },
             selected = true,
             onClick = {}
@@ -144,12 +144,12 @@ private fun BottomNavigation(modifier: Modifier = Modifier) {
         NavigationBarItem(
             icon = {
                 Icon(
-                    imageVector = Icons.Default.AccountCircle,
+                    imageVector = Icons.Default.Edit,
                     contentDescription = null
                 )
             },
             label = {
-                Text(text = "Profile")
+                Text(text = "Quiz")
             },
             selected = false,
             onClick = {}
@@ -164,7 +164,7 @@ fun BottomNavigationPreview() {
 }
 
 @Composable
-fun AnnouncementCard() {
+fun StoryCard() {
     Surface(
         color = MaterialTheme.colorScheme.primary,
 
@@ -205,10 +205,10 @@ fun AnnouncementCard() {
 
 
 @Composable
-fun AnnouncementCardList(
+fun StoryCardList(
     modifier: Modifier = Modifier,
 ){
-    var announcementList = listOf(
+    var StoryList = listOf(
         "1",
         "2",
         "3",
@@ -221,8 +221,8 @@ fun AnnouncementCardList(
         horizontalArrangement = Arrangement.spacedBy(15.dp),
         contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
-        items(announcementList) {item ->
-            AnnouncementCard()
+        items(StoryList) {item ->
+            StoryCard()
         }
     }
 }
