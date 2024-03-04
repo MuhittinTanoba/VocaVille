@@ -16,7 +16,9 @@ import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
+import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.List
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
@@ -35,19 +37,14 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun CategoryScreen(modifier: Modifier) {
-    Scaffold(
-        bottomBar = { BottomNavigation() }
-    ) { padding ->
-        Column(
-            modifier = Modifier
-                .padding(padding),
-            verticalArrangement = Arrangement.spacedBy(16.dp),
-        ) {
-            StoryHeader()
-            StoryCardList()
-            CategoryHeader()
-            CategoryList()
-        }
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.spacedBy(16.dp),
+    ) {
+        StoryHeader()
+        StoryCardList()
+        CategoryHeader()
+        CategoryList()
     }
 }
 
@@ -122,46 +119,6 @@ fun CategoryListPreview() {
     CategoryList()
 }
 
-@Composable
-private fun BottomNavigation(modifier: Modifier = Modifier) {
-    NavigationBar(
-        containerColor = MaterialTheme.colorScheme.surfaceVariant,
-        modifier = modifier
-    ) {
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.List,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(text = "Categories")
-            },
-            selected = true,
-            onClick = {}
-        )
-        NavigationBarItem(
-            icon = {
-                Icon(
-                    imageVector = Icons.Default.Edit,
-                    contentDescription = null
-                )
-            },
-            label = {
-                Text(text = "Quiz")
-            },
-            selected = false,
-            onClick = {}
-        )
-    }
-}
-
-@Preview
-@Composable
-fun BottomNavigationPreview() {
-    BottomNavigation()
-}
 
 @Composable
 fun StoryCard() {
@@ -225,10 +182,4 @@ fun StoryCardList(
             StoryCard()
         }
     }
-}
-
-@Preview
-@Composable
-fun AnnouncementCardListPreview() {
-    AnnouncementCardList()
 }

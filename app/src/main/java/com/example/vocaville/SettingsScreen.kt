@@ -6,5 +6,6 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun SettingsScreen(modifier: Modifier){
-    Text(text = "Settings Screen")
+    Text(text = "Settings Screen",
+        modifier = modifier)
 }
