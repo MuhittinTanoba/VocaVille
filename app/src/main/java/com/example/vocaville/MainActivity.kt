@@ -23,10 +23,11 @@ class MainActivity : ComponentActivity() {
         setContent {
             VocaVilleTheme {
                 Scaffold(
-                    modifier = Modifier.fillMaxSize()) { innerPadding ->
+                    modifier = Modifier.fillMaxSize()
+                ) { innerPadding ->
                     val navController = rememberNavController()
-                    NavHost(navController, startDestination = "home"){
-                        composable("home"){
+                    NavHost(navController, startDestination = "home") {
+                        composable("home") {
                             HomeScreen(
                                 modifier = Modifier.padding(1.dp),
                                 onNavigateToCategory = {
@@ -36,11 +37,23 @@ class MainActivity : ComponentActivity() {
                                     navController.navigate("settings")
                                 })
                         }
-                        composable("category"){
-                            BottomNavigation(modifier = Modifier.padding(paddingValues = innerPadding))
+                        composable("category") {
+                            BottomNavigation(
+                                modifier = Modifier.padding(paddingValues = innerPadding),
+                                onNavigateToStory = {
+                                    navController.navigate("story")
+                                },
+                                navController = navController
+                            )
                         }
-                        composable("settings"){
+                        composable("settings") {
                             SettingsScreen(modifier = Modifier.padding(paddingValues = innerPadding))
+                        }
+                        composable("story") {
+                            StoryDetailScreen(
+                                modifier = Modifier.padding(paddingValues = innerPadding),
+                                navController = navController
+                            )
                         }
                     }
                 }

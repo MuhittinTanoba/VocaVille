@@ -36,13 +36,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CategoryScreen(modifier: Modifier) {
+fun CategoryScreen(modifier: Modifier, onNavigateToStory: () -> Unit) {
     Column(
         modifier = modifier,
         verticalArrangement = Arrangement.spacedBy(16.dp),
     ) {
         StoryHeader()
-        StoryCardList()
+        StoryCardList( onNavigateToStory = onNavigateToStory)
         CategoryHeader()
         CategoryList()
     }
@@ -121,10 +121,12 @@ fun CategoryListPreview() {
 
 
 @Composable
-fun StoryCard() {
+fun StoryCard(
+    onClick: () -> Unit = {},
+) {
     Surface(
         color = MaterialTheme.colorScheme.primary,
-
+        onClick = onClick
     ) {
         Box(
             modifier = Modifier
@@ -164,6 +166,7 @@ fun StoryCard() {
 @Composable
 fun StoryCardList(
     modifier: Modifier = Modifier,
+    onNavigateToStory: () -> Unit
 ){
     var StoryList = listOf(
         "1",
@@ -179,7 +182,11 @@ fun StoryCardList(
         contentPadding = PaddingValues(horizontal = 16.dp),
         ) {
         items(StoryList) {item ->
-            StoryCard()
+            StoryCard(
+                onClick = {
+                    onNavigateToStory()
+                }
+            )
         }
     }
 }
