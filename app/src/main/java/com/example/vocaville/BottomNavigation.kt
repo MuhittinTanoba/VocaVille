@@ -44,7 +44,10 @@ fun BottomNavigation(
                     Text(text = "VocaVille")
                 },
                 navigationIcon = {
-                    IconButton(onClick = { navController.navigateUp() }) {
+                    IconButton(onClick = {
+                        if(selectedPage.value == 0) navController.navigateUp()
+                        else selectedPage.value = 0
+                    }) {
                         Icon(
                             imageVector = Icons.Filled.ArrowBack,
                             contentDescription = "Localized description"
