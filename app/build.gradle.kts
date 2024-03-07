@@ -1,4 +1,5 @@
 plugins {
+    id("kotlin-kapt")
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
 }
@@ -52,11 +53,12 @@ android {
 
 
 dependencies {
-    val room_version = "2.6.1"
+    val roomVersion = "2.6.1"
 
-    implementation("androidx.room:room-runtime:$room_version")
-    annotationProcessor("androidx.room:room-compiler:$room_version")
-    implementation("androidx.room:room-ktx:$room_version")
+    implementation("androidx.room:room-runtime:$roomVersion")
+    kapt("androidx.room:room-compiler:$roomVersion")
+    implementation("androidx.room:room-ktx:$roomVersion")
+    testImplementation("androidx.room:room-testing:$roomVersion")
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)

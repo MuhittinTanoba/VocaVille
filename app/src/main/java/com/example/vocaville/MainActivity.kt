@@ -66,31 +66,11 @@ class MainActivity : ComponentActivity() {
                 }
 
 
-                val context = LocalContext.current
-                val database = VocDatabase.getDatabase(context)!!
-                
-                LaunchedEffect(key1 = true) {
-                    getAllStories(database)
-                }
 
             }
         }
     }
 
-    fun getAllStories(db: VocDatabase){
-        val job: Job = CoroutineScope(Dispatchers.Main).launch {
-            val stories = db.storyDao().getAllStories()
-
-            for(story in stories){
-                Log.e("storyId", story.id.toString())
-                Log.e("storyName", story.storyName)
-                Log.e("storyDescription", story.story)
-                Log.e("storyDate", story.date)
-                Log.e("storyLevel", story.level)
-                Log.e("IsReading", story.isReading.toString())
-            }
-        }
-    }
 }
 
 
