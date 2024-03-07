@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.Scaffold
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -64,12 +65,39 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                 }
-
-
-
             }
         }
     }
+
+    @Composable
+    fun Page(){
+        val context = LocalContext.current
+        val db = Vocdatabase.getDatabase(context)!!
+
+        LaunchedEffect(key1 = true) {
+            allStories(db)
+        }
+    }
+
+    fun allStories(db: Vocdatabase){
+        val job: Job = CoroutineScope(Dispatchers.Main).launch {
+            val stories = db.storiesDao().getAllStories()
+
+            for(s in stories){
+                Log.e("story id", s.story_id.toString())
+                Log.e("story name", s.story_name)
+                Log.e("story desc", s.story_desc)
+                Log.e("story date", s.story_date)
+                Log.e("story level", s.story_level)
+                Log.e("story IsReading", s.story_IsReading.toString())
+
+            }
+
+        }
+    }
+
+
+
 
 }
 
