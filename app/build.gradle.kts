@@ -52,14 +52,11 @@ android {
 
 
 dependencies {
-    implementation(libs.androidx.room.runtime.v252)
-    annotationProcessor(libs.androidx.room.compiler)
+    val room_version = "2.6.1"
 
-    // optional - Kotlin Extensions and Coroutines support
-    implementation(libs.androidx.room.ktx)
-
-    // optional - Test helpers
-    testImplementation(libs.androidx.room.testing)
+    implementation("androidx.room:room-runtime:$room_version")
+    annotationProcessor("androidx.room:room-compiler:$room_version")
+    implementation("androidx.room:room-ktx:$room_version")
 
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.core.ktx)
